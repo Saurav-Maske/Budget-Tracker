@@ -1,11 +1,10 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 import { useAuth } from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../services/api';
 import Input from '../ui/Input';
-import Button from '../ui/Button';
 
 const LoginForm = () => {
   const { login } = useAuth();
@@ -43,9 +42,12 @@ const LoginForm = () => {
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors }) => (
         <Form className="login-form">
           <h2>Welcome Back</h2>
+
+          {errors.message && <div className="form-alert" role="alert">{errors.message}</div>}
+          {errors.errors && <div className="form-alert" role="alert">{errors.errors.join(', ')}</div>}
 
           <Field as={Input} type="email" label="Email" name="email" placeholder="Enter your email" />
 
@@ -55,11 +57,6 @@ const LoginForm = () => {
             {isSubmitting ? 'Logging in...' : 'Login'}
           </button>
 
-          <div className="form-footer">
-            <p>
-              Forgot password? <a href="#">Reset it</a>
-            </p>
-          </div>
         </Form>
       )}
     </Formik>

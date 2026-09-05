@@ -1,5 +1,6 @@
 const Transaction = require('../models/Transaction');
 const Budget = require('../models/Budget');
+const { Sequelize } = require('sequelize');
 const validation = require('../middleware/validation');
 
 const transactionController = {

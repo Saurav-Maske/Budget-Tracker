@@ -9,10 +9,10 @@ const LandingPage = () => {
         <p>Take control of your finances with our simple and intuitive budget tracking app.</p>
         <div className="cta-buttons">
           <Link to="/signup" className="btn btn-primary">Get Started</Link>
-          <Link to="/features" className="btn btn-secondary">Learn More</Link>
+          <a href="#features" className="btn btn-secondary">Learn More</a>
         </div>
       </section>
-      <section className="features">
+      <section className="features" id="features">
         <h2>Features</h2>
         <div className="feature-list">
           <div className="feature-item">

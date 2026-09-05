@@ -16,14 +16,14 @@
 
 .btn-primary {
   color: #fff;
-  background-color: #0d6efd;
-  border-color: #0d6efd;
+  background-color: var(--green);
+  border-color: var(--green);
 }
 
 .btn-secondary {
-  color: #212529;
-  background-color: #e9ecef;
-  border-color: #e9ecef;
+  color: var(--green-dark);
+  background-color: transparent;
+  border-color: var(--green);
 }
 
 .btn-danger {

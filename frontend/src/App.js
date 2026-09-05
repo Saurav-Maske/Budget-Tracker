@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import './App.css';
 import { RequireAuth } from './contexts/AuthContext';
 import Header from './components/layout/Header';
-import Footer from './components/layout/Footer';
 import LandingPage from './pages/LandingPage';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
@@ -12,7 +12,7 @@ import ReportsPage from './pages/ReportsPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
       <div className="App">
         <Header />
         <main>
@@ -29,7 +29,6 @@ function App() {
             <Route path="/reports" element={<RequireAuth><ReportsPage /></RequireAuth>} />
           </Routes>
         </main>
-        <Footer />
       </div>
     </BrowserRouter>
   );

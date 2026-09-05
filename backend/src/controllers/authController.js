@@ -1,5 +1,4 @@
 const User = require('../models/User');
-const passwordUtils = require('../utils/passwordUtils');
 const jwtUtils = require('../utils/jwtUtils');
 
 const authController = {
@@ -18,14 +17,11 @@ const authController = {
         return res.status(400).json({ success: false, message: 'Username already taken' });
       }
 
-      // Hash password
-      const hashedPassword = await passwordUtils.hashPassword(password);
-
       // Create user
       user = await User.create({
         username,
         email,
-        password: hashedPassword
+        password
       });
 
       // Generate token
@@ -57,7 +53,7 @@ const authController = {
       }
 
       // Check password
-      const isMatch = await passwordUtils.comparePassword(password, user.password);
+      const isMatch = await user.comparePassword(password);
       if (!isMatch) {
         return res.status(400).json({ success: false, message: 'Invalid credentials' });
       }

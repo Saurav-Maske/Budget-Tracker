@@ -1,11 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  --ink: #17251f;
+  --muted: #6b7a72;
+  --surface: #ffffff;
+  --canvas: #f4f7f2;
+  --line: #dfe8df;
+  --green: #1f7a58;
+  --green-dark: #14543e;
+}
+
+* { box-sizing: border-box; }
+
+html { background: var(--canvas); }
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  color: var(--ink);
+  background: var(--canvas);
+  font-family: 'DM Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+button, input, select, textarea { font: inherit; }
+a { color: inherit; }
+#root { min-height: 100vh; }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',

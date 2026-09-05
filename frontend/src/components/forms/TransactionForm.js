@@ -1,29 +1,31 @@
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import { useAuth } from '../../hooks/useAuth';
 import { useNavigate, useParams } from 'react-router-dom';
 import { transactions } from '../../services/api';
 import Input from '../ui/Input';
 import Select from '../ui/Select';
-import Button from '../ui/Button';
+import { expenseCategoryOptions, incomeCategoryOptions } from '../../utils/categories';
 
-const TransactionForm = () => {
-  const { user } = useAuth();
+const TransactionForm = ({ onSaved, transaction = null }) => {
   const navigate = useNavigate();
-  const { transactionId } = useParams();
-  const isEdit = !!transactionId;
+  const { transactionId: routeTransactionId } = useParams();
+  const transactionId = transaction?.id || routeTransactionId;
+  const isEdit = Boolean(transactionId);
 
-  const initialValues = {
+  const initialValues = transaction ? {
+    type: transaction.type,
+    amount: transaction.amount,
+    category: transaction.category,
+    description: transaction.description || '',
+    date: new Date(transaction.date).toISOString().split('T')[0]
+  } : {
     type: 'expense',
     amount: '',
     category: '',
     description: '',
     date: new Date().toISOString().split('T')[0]
   };
-
-  // If editing, we would fetch the transaction and set initialValues accordingly
-  // For simplicity, we are not implementing the fetch here, but in a real app we would.
 
   const validationSchema = Yup.object({
     type: Yup.string().oneOf(['income', 'expense'], 'Invalid type').required('Type required'),
@@ -33,7 +35,7 @@ const TransactionForm = () => {
     date: Yup.date().required('Date required')
   });
 
-  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+  const handleSubmit = async (values, { setSubmitting, resetForm, setErrors }) => {
     try {
       const transactionData = {
         ...values,
@@ -49,17 +51,11 @@ const TransactionForm = () => {
 
       // Reset form and redirect or show success message
       resetForm();
-      navigate(isEdit ? '/transactions' : '/transactions'); // Adjust as needed
+      if (onSaved) onSaved();
+      navigate('/transactions');
     } catch (error) {
-      console.error(error);
-      // Set error in formik
-      if (error.response && error.response.data) {
-        // Assuming the backend returns validation errors in a certain format
-        // For now, we'll just set a general error
-        throw new Error(error.response.data.message || 'Transaction failed');
-      } else {
-        throw new Error('Transaction failed. Please try again.');
-      }
+      const response = error.response?.data;
+      setErrors({ _error: response?.message || 'Transaction failed. Please try again.' });
     } finally {
       setSubmitting(false);
     }
@@ -68,12 +64,15 @@ const TransactionForm = () => {
   return (
     <Formik
       initialValues={initialValues}
+      enableReinitialize
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
     >
-      {({ isSubmitting }) => (
+      {({ isSubmitting, errors, values, setFieldValue }) => (
         <Form className="transaction-form">
           <h2>{isEdit ? 'Edit Transaction' : 'Add Transaction'}</h2>
+
+          {errors._error && <div className="form-alert" role="alert">{errors._error}</div>}
 
           <div className="form-row">
             <Field as={Select}
@@ -82,7 +81,11 @@ const TransactionForm = () => {
                    options={[
                      { value: 'income', label: 'Income' },
                      { value: 'expense', label: 'Expense' }
-                   ]} />
+                   ]}
+                   onChange={event => {
+                     setFieldValue('type', event.target.value);
+                     setFieldValue('category', '');
+                   }} />
             <Field as={Input}
                    label="Amount"
                    name="amount"
@@ -90,10 +93,10 @@ const TransactionForm = () => {
                    placeholder="Enter amount" />
           </div>
 
-          <Field as={Input}
-                 label="Category"
-                 name="category"
-                 placeholder="Enter category" />
+             <Field as={Select}
+               label="Category"
+               name="category"
+                 options={values.type === 'income' ? incomeCategoryOptions : expenseCategoryOptions} />
 
           <Field as={Input}
                  label="Description"

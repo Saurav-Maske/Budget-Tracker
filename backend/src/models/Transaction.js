@@ -1,7 +1,11 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/database');
+const { sequelize } = require('../config/database');
 
 const Transaction = sequelize.define('Transaction', {
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false
+  },
   type: {
     type: DataTypes.ENUM('income', 'expense'),
     allowNull: false

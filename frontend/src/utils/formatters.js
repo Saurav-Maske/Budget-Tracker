@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, isValid } from 'date-fns';
 
 export const formatCurrency = (number, currency = 'USD') => {
   return new Intl.NumberFormat('en-US', {
@@ -11,14 +11,8 @@ export const formatDate = (date, opts = {}) => {
   if (typeof date === 'string') {
     date = new Date(date);
   }
-  return format(date, {
-    ...{
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    },
-    ...opts
-  });
+  if (!date || !isValid(date)) return 'Unknown date';
+  return format(date, opts.pattern || 'MMM d, yyyy');
 };
 
 export const calculatePercentage = (part, total) => {

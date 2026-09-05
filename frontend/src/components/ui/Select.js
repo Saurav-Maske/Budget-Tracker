@@ -1,7 +1,10 @@
 import React from 'react';
 import './Select.css';
 
-const Select = ({ label, options, value, onChange, error }) => {
+const Select = ({ field = {}, meta = {}, label, options, ...selectProps }) => {
+  const { value = '', onChange = () => {} } = field;
+  const error = meta.touched ? meta.error : false;
+
   return (
     <div className="select-group">
       {label && <label className="select-label">{label}</label>}
@@ -9,9 +12,10 @@ const Select = ({ label, options, value, onChange, error }) => {
         className={`select-field${error ? ' select-error' : ''}`}
         value={value}
         onChange={e => onChange(e.target.value)}
+        {...selectProps}
       >
         <option value="">Select an option</option>
-        {options.map(option => (
+        {options?.map(option => (
           <option key={option.value} value={option.value}>
             {option.label}
           </option>

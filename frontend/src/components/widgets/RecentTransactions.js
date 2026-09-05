@@ -2,7 +2,7 @@ import React from 'react';
 import { formatDate } from '../../utils/formatters';
 import './RecentTransactions.css';
 
-const RecentTransactions = ({ transactions }) => {
+const RecentTransactions = ({ transactions, onEdit, onDelete }) => {
   if (!transactions || transactions.length === 0) {
     return (
       <div className="recent-transactions-empty">
@@ -20,6 +20,7 @@ const RecentTransactions = ({ transactions }) => {
             <th>Description</th>
             <th>Category</th>
             <th className="text-end">Amount</th>
+            {(onEdit || onDelete) && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -31,6 +32,10 @@ const RecentTransactions = ({ transactions }) => {
               <td className={`text-end amount-${tx.type}`}>
                 {tx.type === 'income' ? '+' : '-'}{tx.amount}
               </td>
+              {(onEdit || onDelete) && <td className="transaction-actions">
+                {onEdit && <button type="button" className="table-action" onClick={() => onEdit(tx)}>Edit</button>}
+                {onDelete && <button type="button" className="table-action table-action-danger" onClick={() => onDelete(tx.id)}>Delete</button>}
+              </td>}
             </tr>
           ))}
         </tbody>
