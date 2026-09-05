@@ -18,7 +18,8 @@ const getSequelize = (env) => {
   return new Sequelize(config[env]);
 };
 
-// For backward compatibility, export a sequelize instance for development and connectDB function
+// For backward compatibility, we export the config and a function to get the sequelize instance
+// and a connectDB function that uses the development environment
 const sequelize = getSequelize(process.env.NODE_ENV || 'development');
 
 const connectDB = async () => {
