@@ -1,0 +1,40 @@
+.recent-transactions-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #6c757d;
+}
+
+.recent-transactions-list {
+  margin-top: 1.5rem;
+}
+
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-table th,
+.transactions-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.transactions-table th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
+
+.transactions-table tbody tr:hover {
+  background-color: #f1f3f5;
+}
+
+.amount-income {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.amount-expense {
+  color: #dc3545;
+  font-weight: 500;
+}
