@@ -25,7 +25,8 @@ const budgetSchema = Joi.object({
   limit: Joi.number().min(0).required(),
   period: Joi.string().valid('weekly', 'monthly', 'yearly').default('monthly'),
   startDate: Joi.date().default(Date.now),
-  endDate: Joi.date().allow(null)
+  endDate: Joi.date().allow(null),
+  alertThreshold: Joi.number().min(1).max(100).default(75)
 });
 
 // Validation middleware

@@ -30,6 +30,15 @@ const Budget = sequelize.define('Budget', {
   endDate: {
     type: DataTypes.DATE,
     allowNull: true
+  },
+  alertThreshold: {
+    type: DataTypes.DECIMAL(5, 2),
+    allowNull: false,
+    defaultValue: 75,
+    validate: {
+      min: 0,
+      max: 100
+    }
   }
 }, {
   timestamps: true,

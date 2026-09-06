@@ -25,6 +25,14 @@ const budgetController = {
         const limit = parseFloat(budget.limit);
         const spentAmount = parseFloat(spent);
 
+        const percentage = limit > 0 ? (spentAmount / limit) * 100 : 0;
+        let alertStatus = 'on-track';
+        if (spentAmount > limit) {
+          alertStatus = 'exceeded';
+        } else if (percentage >= budget.alertThreshold) {
+          alertStatus = 'warning';
+        }
+
         return {
           id: budget.id,
           category: budget.category,
@@ -34,7 +42,9 @@ const budgetController = {
           endDate: budget.endDate,
           spent: spentAmount,
           remaining: limit - spentAmount,
-          percentage: limit > 0 ? (spentAmount / limit) * 100 : 0
+          percentage,
+          alertThreshold: parseFloat(budget.alertThreshold),
+          alertStatus
         };
       }));
 
@@ -47,7 +57,7 @@ const budgetController = {
 
   setBudget: async (req, res) => {
     try {
-      const { category, limit, period, startDate, endDate } = req.body;
+      const { category, limit, period, startDate, endDate, alertThreshold } = req.body;
       const userId = req.user.id;
 
       // Upsert budget (update if exists, create if not)
@@ -60,7 +70,8 @@ const budgetController = {
         defaults: {
           limit,
           startDate: startDate || new Date(),
-          endDate: endDate || null
+          endDate: endDate || null,
+          alertThreshold: alertThreshold || 75
         }
       });
 
@@ -69,7 +80,8 @@ const budgetController = {
         await budget.update({
           limit,
           startDate: startDate || budget.startDate,
-          endDate: endDate || budget.endDate
+          endDate: endDate || budget.endDate,
+          alertThreshold: alertThreshold || budget.alertThreshold
         });
       }
 
@@ -87,7 +99,7 @@ const budgetController = {
   updateBudget: async (req, res) => {
     try {
       const { id } = req.params;
-      const { category, limit, period, startDate, endDate } = req.body;
+      const { category, limit, period, startDate, endDate, alertThreshold } = req.body;
       const budget = await Budget.findOne({ where: { id, userId: req.user.id } });
 
       if (!budget) {
@@ -99,7 +111,8 @@ const budgetController = {
         limit,
         period,
         startDate: startDate || budget.startDate,
-        endDate: endDate || null
+        endDate: endDate || null,
+        alertThreshold: alertThreshold || budget.alertThreshold
       });
 
       res.json({ success: true, budget: budget.get() });

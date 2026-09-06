@@ -176,6 +176,32 @@ main {
   box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
 }
 
+.alert-badge {
+  display: inline-block;
+  margin-top: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.alert-badge-success {
+  background: rgba(76, 175, 80, 0.15);
+  color: #2e7d32;
+}
+
+.alert-badge-warning {
+  background: rgba(255, 152, 0, 0.15);
+  color: #e65100;
+}
+
+.alert-badge-danger {
+  background: rgba(244, 67, 54, 0.15);
+  color: #c62828;
+}
+
 @media (max-width: 700px) {
   .page-shell { padding-top: 2rem; }
   .feature-list, .stats-grid, .dashboard-grid { grid-template-columns: 1fr; }
