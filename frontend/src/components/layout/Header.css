@@ -1,5 +1,5 @@
 .app-header {
-  background-color: rgba(255, 255, 255, 0.94);
+  background-color: var(--header);
   border-bottom: 1px solid var(--line);
   padding: 0.9rem 0;
   position: sticky;
@@ -68,6 +68,19 @@
 .logout-btn:hover {
   background-color: rgba(220, 53, 69, 0.1);
 }
+
+.theme-toggle {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  color: var(--ink);
+  background: var(--surface);
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.theme-toggle:hover { border-color: var(--green); color: var(--green); }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

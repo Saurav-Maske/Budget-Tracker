@@ -56,6 +56,12 @@ main {
 .budget-actions { text-align: right; }
 .budget-card progress { grid-column: 1 / -1; width: 100%; accent-color: var(--green); }
 .dashboard-recent { margin-top: 1rem; }
+.trend-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.25rem; }
+.trend-summary div { display: grid; gap: 0.35rem; }
+.trend-summary span { color: var(--muted); font-size: 0.85rem; }
+.trend-summary strong { font-family: 'Space Grotesk', sans-serif; font-size: 1.35rem; }
+.trend-positive { color: var(--green); }
+.trend-negative { color: var(--coral); }
 .transaction-actions { white-space: nowrap; }
 .table-action { margin-right: 0.5rem; border: 0; color: var(--green); background: transparent; cursor: pointer; font-weight: 700; }
 .table-action-danger { color: var(--coral); }
@@ -209,5 +215,6 @@ main {
   .charts-grid { grid-template-columns: 1fr; }
   .filters-grid { grid-template-columns: 1fr; }
   .dashboard-header { align-items: start; flex-direction: column; }
+  .trend-summary { grid-template-columns: 1fr; }
   .hero { padding-top: 4rem; padding-bottom: 4rem; }
 }

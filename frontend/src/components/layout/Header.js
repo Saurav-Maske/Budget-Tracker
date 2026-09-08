@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ darkMode, onToggleTheme }) => {
   const { user, logout } = useAuth();
 
   return (
@@ -13,6 +13,9 @@ const Header = () => {
           Budget Tracker
         </Link>
         <nav className="header-nav">
+          <button className="theme-toggle" type="button" onClick={onToggleTheme} aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'} title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}>
+            {darkMode ? 'Sun' : 'Moon'}
+          </button>
           {user ? (
             <>
               <Link to="/dashboard" className="nav-link">Dashboard</Link>

@@ -8,6 +8,24 @@
   --line: #dfe8df;
   --green: #1f7a58;
   --green-dark: #14543e;
+  --header: rgba(255, 255, 255, 0.94);
+  --shadow: rgba(23, 37, 31, 0.05);
+  --chart-grid: #dfe8df;
+  --chart-text: #6b7a72;
+}
+
+:root[data-theme='dark'] {
+  --ink: #edf4ef;
+  --muted: #a5b5ac;
+  --surface: #1c2923;
+  --canvas: #111a16;
+  --line: #34463c;
+  --green: #6fc49c;
+  --green-dark: #a2e2c0;
+  --header: rgba(17, 26, 22, 0.96);
+  --shadow: rgba(0, 0, 0, 0.2);
+  --chart-grid: #34463c;
+  --chart-text: #a5b5ac;
 }
 
 * { box-sizing: border-box; }

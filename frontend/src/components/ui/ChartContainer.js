@@ -18,12 +18,24 @@ const ChartContainer = ({
       <ResponsiveContainer width="100%" height={300}>
         {chartType === 'Line' && (
           <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
+            <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
+            <XAxis dataKey="name" stroke="var(--chart-text)" />
+            <YAxis stroke="var(--chart-text)" />
             <Line type="monotone" dataKey="value" stroke="#1f7a58" strokeWidth={2} />
             <Tooltip />
             <Legend />
+          </LineChart>
+        )}
+        {chartType === 'Trend' && (
+          <LineChart data={data}>
+            <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
+            <XAxis dataKey="name" stroke="var(--chart-text)" />
+            <YAxis stroke="var(--chart-text)" />
+            <Tooltip formatter={value => [`$${Number(value).toFixed(2)}`, '']} />
+            <Legend />
+            <Line type="monotone" dataKey="income" name="Income" stroke="#4b78a8" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="expenses" name="Expenses" stroke="#d96950" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="net" name="Net" stroke="#1f7a58" strokeWidth={2} dot={false} />
           </LineChart>
         )}
         {chartType === 'Pie' && (

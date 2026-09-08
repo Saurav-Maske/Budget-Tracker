@@ -19,11 +19,22 @@ const ReportsPage = () => {
     return groups;
   }, {}));
   const monthlyData = Object.values(data.reduce((groups, item) => {
-    const month = new Date(item.date).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-    groups[month] = groups[month] || { name: month, value: 0 };
-    groups[month].value += item.type === 'expense' ? Number(item.amount) : 0;
+    const date = new Date(item.date);
+    const key = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}`;
+    const month = date.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    groups[key] = groups[key] || { name: month, sortKey: key, income: 0, expenses: 0, net: 0 };
+    const amount = Number(item.amount);
+    if (item.type === 'expense') groups[key].expenses += amount;
+    if (item.type === 'income') groups[key].income += amount;
+    groups[key].net = groups[key].income - groups[key].expenses;
     return groups;
-  }, {}));
+  }, {})).sort((first, second) => first.sortKey.localeCompare(second.sortKey));
+
+  const latestMonth = monthlyData[monthlyData.length - 1];
+  const previousMonth = monthlyData[monthlyData.length - 2];
+  const spendingChange = latestMonth && previousMonth && previousMonth.expenses > 0
+    ? ((latestMonth.expenses - previousMonth.expenses) / previousMonth.expenses) * 100
+    : null;
 
   const handleExport = () => {
     const document = new jsPDF();
@@ -58,11 +69,16 @@ const ReportsPage = () => {
       </div>
       {data.length === 0 ? <section className="dashboard-panel empty-state"><h2>No report data yet</h2><p>Add transactions to generate your income and spending report.</p></section> : <>
         <section className="dashboard-panel">
-          <h2>Monthly trends</h2>
-          <p>Total income: {formatCurrency(income)}</p><p>Total spending: {formatCurrency(expenses)}</p>
+          <h2>Spending trends</h2>
+          <p>Compare income, expenses, and net cash flow month by month.</p>
+          <div className="trend-summary">
+            <div><span>Latest month</span><strong>{latestMonth?.name || 'No data'}</strong></div>
+            <div><span>Monthly spending</span><strong>{formatCurrency(latestMonth?.expenses || 0)}</strong></div>
+            <div><span>Change from prior month</span><strong className={spendingChange > 0 ? 'trend-negative' : 'trend-positive'}>{spendingChange === null ? 'Not enough data' : `${spendingChange >= 0 ? '+' : ''}${spendingChange.toFixed(1)}%`}</strong></div>
+          </div>
         </section>
         <div className="charts-grid">
-          <ChartContainer chartType="Line" data={monthlyData} title="Spending by month" description="Expense totals from your transactions" />
+          <ChartContainer chartType="Trend" data={monthlyData} title="Income and spending" description="Monthly totals and net cash flow" />
           <ChartContainer chartType="Pie" data={categoryData} title="Expenses by category" description="Expense totals grouped by category" />
         </div>
       </>}

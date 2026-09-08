@@ -1,5 +1,5 @@
 .stats-card {
-  background: white;
+  background: var(--surface);
   border-radius: 0.5rem;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   padding: 1.5rem;
@@ -22,7 +22,7 @@
 .stats-card-title {
   font-size: 0.875rem;
   font-weight: 500;
-  color: #6c757d;
+  color: var(--muted);
   margin: 0;
 }
 
@@ -34,7 +34,7 @@
 .stats-card-value {
   font-size: 1.75rem;
   font-weight: bold;
-  color: #212529;
+  color: var(--ink);
   margin: 0.5rem 0;
 }
 

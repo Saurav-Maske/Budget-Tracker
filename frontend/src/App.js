@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
 import { RequireAuth } from './contexts/AuthContext';
@@ -11,10 +12,17 @@ import BudgetsPage from './pages/BudgetsPage';
 import ReportsPage from './pages/ReportsPage';
 
 function App() {
+  const [darkMode, setDarkMode] = useState(() => localStorage.getItem('budget-tracker-theme') === 'dark');
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = darkMode ? 'dark' : 'light';
+    localStorage.setItem('budget-tracker-theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
   return (
     <BrowserRouter future={{ v7_relativeSplatPath: true, v7_startTransition: true }}>
       <div className="App">
-        <Header />
+        <Header darkMode={darkMode} onToggleTheme={() => setDarkMode(current => !current)} />
         <main>
           <Routes>
             {/* Public routes */}

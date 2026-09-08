@@ -1,7 +1,7 @@
 .recent-transactions-empty {
   text-align: center;
   padding: 2rem;
-  color: #6c757d;
+  color: var(--muted);
 }
 
 .recent-transactions-list {
@@ -17,16 +17,16 @@
 .transactions-table td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #dee2e6;
+  border-bottom: 1px solid var(--line);
 }
 
 .transactions-table th {
-  background-color: #f8f9fa;
+  background-color: var(--surface);
   font-weight: 600;
 }
 
 .transactions-table tbody tr:hover {
-  background-color: #f1f3f5;
+  background-color: var(--canvas);
 }
 
 .amount-income {
