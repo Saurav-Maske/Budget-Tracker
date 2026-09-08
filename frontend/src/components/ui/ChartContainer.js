@@ -9,7 +9,7 @@ const ChartContainer = ({
   title = '',
   description = ''
 }) => {
-  const colors = ['#1f7a58', '#d96950', '#e4a93a', '#4b78a8', '#8b5e83', '#6b7a72'];
+  const colors = ['var(--chart-net)', 'var(--chart-expense)', '#e4a93a', 'var(--chart-income)', '#8b5e83', 'var(--chart-text)'];
 
   return (
     <div className="chart-container">
@@ -21,7 +21,7 @@ const ChartContainer = ({
             <CartesianGrid stroke="var(--chart-grid)" strokeDasharray="3 3" />
             <XAxis dataKey="name" stroke="var(--chart-text)" />
             <YAxis stroke="var(--chart-text)" />
-            <Line type="monotone" dataKey="value" stroke="#1f7a58" strokeWidth={2} />
+            <Line type="monotone" dataKey="value" stroke="var(--chart-net)" strokeWidth={2} />
             <Tooltip />
             <Legend />
           </LineChart>
@@ -33,9 +33,9 @@ const ChartContainer = ({
             <YAxis stroke="var(--chart-text)" />
             <Tooltip formatter={value => [`$${Number(value).toFixed(2)}`, '']} />
             <Legend />
-            <Line type="monotone" dataKey="income" name="Income" stroke="#4b78a8" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="expenses" name="Expenses" stroke="#d96950" strokeWidth={2} dot={false} />
-            <Line type="monotone" dataKey="net" name="Net" stroke="#1f7a58" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="income" name="Income" stroke="var(--chart-income)" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="expenses" name="Expenses" stroke="var(--chart-expense)" strokeWidth={2} dot={false} />
+            <Line type="monotone" dataKey="net" name="Net" stroke="var(--chart-net)" strokeWidth={2} dot={false} />
           </LineChart>
         )}
         {chartType === 'Pie' && (

@@ -15,7 +15,7 @@
 }
 
 .btn-primary {
-  color: #fff;
+  color: #ffffff;
   background-color: var(--green);
   border-color: var(--green);
 }
@@ -27,9 +27,9 @@
 }
 
 .btn-danger {
-  color: #fff;
-  background-color: #dc3545;
-  border-color: #dc3545;
+  color: #ffffff;
+  background-color: var(--danger);
+  border-color: var(--danger);
 }
 
 .btn-medium {

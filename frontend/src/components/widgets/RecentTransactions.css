@@ -11,6 +11,7 @@
 .transactions-table {
   width: 100%;
   border-collapse: collapse;
+  color: var(--ink);
 }
 
 .transactions-table th,
@@ -30,11 +31,11 @@
 }
 
 .amount-income {
-  color: #28a745;
+  color: var(--success);
   font-weight: 500;
 }
 
 .amount-expense {
-  color: #dc3545;
+  color: var(--danger);
   font-weight: 500;
 }

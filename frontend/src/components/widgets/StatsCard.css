@@ -28,7 +28,7 @@
 
 .stats-card-icon {
   font-size: 1.5rem;
-  color: #0d6efd;
+  color: var(--green);
 }
 
 .stats-card-value {
@@ -44,9 +44,9 @@
 }
 
 .stats-card-trend.trend-up {
-  color: #28a745;
+  color: var(--success);
 }
 
 .stats-card-trend.trend-down {
-  color: #dc3545;
+  color: var(--danger);
 }

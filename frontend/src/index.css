@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
 
 :root {
+  color-scheme: light;
   --ink: #17251f;
   --muted: #6b7a72;
   --surface: #ffffff;
@@ -12,9 +13,20 @@
   --shadow: rgba(23, 37, 31, 0.05);
   --chart-grid: #dfe8df;
   --chart-text: #6b7a72;
+  --coral: #c62828;
+  --danger: #dc3545;
+  --success: #2e7d32;
+  --input-border: #ced4da;
+  --hero-start: #dcefe4;
+  --hero-middle: #f4f7f2;
+  --hero-end: #f6dfd4;
+  --chart-income: #4b78a8;
+  --chart-expense: #d96950;
+  --chart-net: #1f7a58;
 }
 
 :root[data-theme='dark'] {
+  color-scheme: dark;
   --ink: #edf4ef;
   --muted: #a5b5ac;
   --surface: #1c2923;
@@ -26,6 +38,16 @@
   --shadow: rgba(0, 0, 0, 0.2);
   --chart-grid: #34463c;
   --chart-text: #a5b5ac;
+  --coral: #ff8a80;
+  --danger: #ff8a80;
+  --success: #81c784;
+  --input-border: #587064;
+  --hero-start: #193b2d;
+  --hero-middle: #111a16;
+  --hero-end: #3c2925;
+  --chart-income: #8db7e0;
+  --chart-expense: #ff9b83;
+  --chart-net: #6fc49c;
 }
 
 * { box-sizing: border-box; }
@@ -41,7 +63,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-button, input, select, textarea { font: inherit; }
+button, input, select, textarea { font: inherit; color: var(--ink); }
 a { color: inherit; }
 #root { min-height: 100vh; }
 
