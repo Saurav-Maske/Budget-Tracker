@@ -2,6 +2,18 @@ const Budget = require('../models/Budget');
 const Transaction = require('../models/Transaction');
 const { Op } = require('sequelize');
 
+const getBudgetDateRange = (budget) => {
+  const startDate = new Date(budget.startDate);
+  startDate.setHours(0, 0, 0, 0);
+
+  const endDate = budget.endDate ? new Date(budget.endDate) : new Date();
+  if (budget.endDate) {
+    endDate.setHours(23, 59, 59, 999);
+  }
+
+  return { startDate, endDate };
+};
+
 const budgetController = {
   getBudgets: async (req, res) => {
     try {
@@ -11,14 +23,15 @@ const budgetController = {
 
       // Format the response
       const formattedBudgets = await Promise.all(budgets.map(async (budget) => {
+        const { startDate, endDate } = getBudgetDateRange(budget);
         const spent = await Transaction.sum('amount', {
           where: {
             userId: req.user.id,
             category: budget.category,
             type: 'expense',
             date: {
-              [Op.gte]: budget.startDate,
-              [Op.lte]: budget.endDate || new Date()
+              [Op.gte]: startDate,
+              [Op.lte]: endDate
             }
           }
         }) || 0;
@@ -162,14 +175,15 @@ const budgetController = {
       }
 
       // Calculate spent amount in the budget period
+      const { startDate, endDate } = getBudgetDateRange(budget);
       const spent = await Transaction.sum('amount', {
         where: {
           userId: req.user.id,
           category,
           type: 'expense',
           date: {
-            [Op.gte]: budget.startDate,
-            [Op.lte]: budget.endDate || new Date()
+            [Op.gte]: startDate,
+            [Op.lte]: endDate
           }
         }
       }) || 0;

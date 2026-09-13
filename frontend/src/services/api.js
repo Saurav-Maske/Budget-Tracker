@@ -49,4 +49,5 @@ export const budgets = {
   getByCategory: (category) => api.get(`/budgets/${category}`)
 };
 
+
 export default api;
