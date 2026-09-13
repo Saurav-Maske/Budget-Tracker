@@ -47,8 +47,52 @@
   white-space: nowrap;
 }
 
-.user-name {
-  font-weight: 500;
+.user-profile {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink);
+  cursor: help;
+  font-size: 1.45rem;
+  outline: none;
+}
+
+.user-profile:hover,
+.user-profile:focus-visible {
+  color: var(--green);
+}
+
+.user-tooltip {
+  position: absolute;
+  top: calc(100% + 0.75rem);
+  right: 0;
+  z-index: 10;
+  display: grid;
+  gap: 0.2rem;
+  min-width: 180px;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 10px 24px rgba(23, 37, 31, 0.16);
+  font-size: 0.85rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+
+.user-tooltip span {
+  color: var(--muted);
+  font-size: 0.78rem;
+  overflow-wrap: anywhere;
+}
+
+.user-profile:hover .user-tooltip,
+.user-profile:focus-visible .user-tooltip {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .logout-btn {
