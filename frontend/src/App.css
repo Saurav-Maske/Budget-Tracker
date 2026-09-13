@@ -56,6 +56,15 @@ main {
 .budget-actions { text-align: right; }
 .budget-card progress { grid-column: 1 / -1; width: 100%; accent-color: var(--green); }
 .dashboard-recent { margin-top: 1rem; }
+.dashboard-alerts { margin-top: 1rem; }
+.dashboard-alerts-header { display: flex; justify-content: space-between; align-items: start; gap: 1rem; }
+.dashboard-alerts-header h2 { margin: 0; }
+.dashboard-alert-list { display: grid; gap: 0.75rem; margin-top: 1rem; }
+.dashboard-alert { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.9rem 1rem; border-left: 4px solid var(--coral); background: color-mix(in srgb, var(--coral) 9%, var(--surface)); }
+.dashboard-alert-warning { border-left-color: #e6a23c; background: color-mix(in srgb, #e6a23c 9%, var(--surface)); }
+.dashboard-alert > div { display: grid; gap: 0.2rem; }
+.dashboard-alert span { color: var(--muted); font-size: 0.9rem; }
+.dashboard-alert > strong { white-space: nowrap; font-family: 'Space Grotesk', sans-serif; }
 .trend-summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.25rem; }
 .trend-summary div { display: grid; gap: 0.35rem; }
 .trend-summary span { color: var(--muted); font-size: 0.85rem; }
@@ -217,5 +226,7 @@ main {
   .filters-grid { grid-template-columns: 1fr; }
   .dashboard-header { align-items: start; flex-direction: column; }
   .trend-summary { grid-template-columns: 1fr; }
+  .dashboard-alerts-header, .dashboard-alert { align-items: start; flex-direction: column; }
+  .dashboard-alert > strong { white-space: normal; }
   .hero { padding-top: 4rem; padding-bottom: 4rem; }
 }
