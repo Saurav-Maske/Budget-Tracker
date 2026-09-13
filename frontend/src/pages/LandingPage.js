@@ -5,11 +5,16 @@ const LandingPage = () => {
   return (
     <div className="landing-page">
       <section className="hero">
-        <h1>Budget Tracker</h1>
-        <p>Take control of your finances with our simple and intuitive budget tracking app.</p>
-        <div className="cta-buttons">
-          <Link to="/signup" className="btn btn-primary">Get Started</Link>
-          <a href="#features" className="btn btn-secondary">Learn More</a>
+        <div className="hero-content">
+          <div className="hero-copy">
+            <h1>Budget Tracker</h1>
+            <p>Take control of your finances with our simple and intuitive budget tracking app.</p>
+            <div className="cta-buttons">
+              <Link to="/signup" className="btn btn-primary">Get Started</Link>
+              <a href="#features" className="btn btn-secondary">Learn More</a>
+            </div>
+          </div>
+          <img className="landing-logo" src="/logo.jpg" alt="Budget Tracker" />
         </div>
       </section>
       <section className="features" id="features">

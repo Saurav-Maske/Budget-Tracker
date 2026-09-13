@@ -9,9 +9,6 @@ const Header = ({ darkMode, onToggleTheme }) => {
   return (
     <header className="app-header">
       <div className="header-content">
-        <Link to="/" className="logo">
-          Budget Tracker
-        </Link>
         <nav className="header-nav">
           <button className="theme-toggle" type="button" onClick={onToggleTheme} aria-label={darkMode ? 'Switch to light mode' : 'Switch to dark mode'} title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}>
             {darkMode ? 'Sun' : 'Moon'}

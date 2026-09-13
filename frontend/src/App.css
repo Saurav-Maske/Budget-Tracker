@@ -83,6 +83,17 @@ main {
   background: linear-gradient(115deg, var(--hero-start) 0%, var(--hero-middle) 58%, var(--hero-end) 100%);
 }
 
+.hero-content {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 0.9fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 6rem);
+}
+
+.hero-copy { min-width: 0; }
+
 .hero h1, .page-title {
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
@@ -134,6 +145,14 @@ main {
   align-items: end;
   gap: 1rem;
   margin-bottom: 2rem;
+}
+
+.landing-logo {
+  width: 100%;
+  height: min(30vw, 360px);
+  object-fit: contain;
+  display: block;
+  transform: scale(1.15);
 }
 
 .eyebrow {
@@ -225,6 +244,8 @@ main {
   .charts-grid { grid-template-columns: 1fr; }
   .filters-grid { grid-template-columns: 1fr; }
   .dashboard-header { align-items: start; flex-direction: column; }
+  .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
+  .landing-logo { width: min(100%, 420px); height: 220px; margin: 0 auto; transform: none; }
   .trend-summary { grid-template-columns: 1fr; }
   .dashboard-alerts-header, .dashboard-alert { align-items: start; flex-direction: column; }
   .dashboard-alert > strong { white-space: normal; }
